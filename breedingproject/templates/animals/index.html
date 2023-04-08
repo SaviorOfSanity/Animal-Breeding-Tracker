@@ -1,0 +1,92 @@
+{% extends 'partials/base.html' %}
+{% block title %}Breeding{% endblock %}
+
+
+{% block content %}
+
+  <body>
+    <h1>Breeding</h1>
+    <div class="container">
+        <div class="row">
+          <div class="col-6">
+              <h3>Animals</h3>
+              
+              <canvas id="myChart" width="50" height="50"></canvas>
+              <script>
+              const ctx = document.getElementById('myChart').getContext('2d');
+              const myChart = new Chart(ctx, {
+                  type: 'pie',
+                  data: {
+                      labels: {{ labels|safe }},
+                      datasets: [{
+                          label: 'Types of Animals',
+                          data: {{ data|safe }},
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                          ],
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          y: {
+                              beginAtZero: false
+                          }
+                      }
+                  }
+              });
+              </script>
+              
+          </div>
+          <div class="col">
+              <h3>Current Animals</h3>
+            <table class="table table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Common Name</th>
+                    <th scope="col">Scientific Name</th>
+                    <th scope="col">Gender</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for animal in animals %}
+                  <tr>
+                    
+                    <th scope="row">{{ animal.pk }}</th>
+                    <td>{{ animal.common_name }}</td>
+                    <td>{{ animal.scientific_name }}</td>
+                    <td>{{ animal.sex }}</td>
+                    
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <center><h1>Blog</h1></center>
+        
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem distinctio pariatur cum laboriosam est officiis, ipsa beatae corrupti quam? Voluptates quis, sit reprehenderit nobis recusandae tempore quos tempora id necessitatibus!</p>
+    </div>
+
+
+
+    {% endblock %}
+
